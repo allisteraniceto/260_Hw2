@@ -50,7 +50,10 @@ char logic_NOT(char a) {
  * NOTE: Use the functions logic_NOT, logic_AND, logic_OR
  * to implement this function.
  */
-char logic_NOR(char a, char b) {
+char logic_NOR(char a, char b) { //if AND is not true (0), then return true
+    if (logic_OR(a,b)!='1'){
+        return '1';
+    }
     return '0';
 }
 
@@ -64,6 +67,9 @@ char logic_NOR(char a, char b) {
  * to implement this function.
  */
 char logic_NAND(char a, char b) {
+    if (logic_AND(a,b)!=1){ //if AND is not true (0), then return true
+        return '1';
+    }
     return '0';
 }
 
@@ -78,6 +84,9 @@ char logic_NAND(char a, char b) {
  * to implement this function.
  */
 char logic_XOR(char a, char b) {
+    if ((logic_OR(a,b)=='1')&& !(a=='1' && b=='1')){ //if a,b pass or AND a,b are both not 1, return true
+        return '1'; 
+    }
     return '0';
 }
 
@@ -100,6 +109,20 @@ char logic_XOR(char a, char b) {
  * to implement this function.
  */
 void logic_FULL_ADDR(char cin, char a, char b, char *cout, char *s) {
+    char w;
+    char x;
+    char y;
+    char z;
+
+    //sum bit
+    w=logic_XOR(a,b); //A xor B
+    s=logic_XOR(w,cin); //A xor B xor Cin
+
+    //carry bit
+    x=logic_AND(a,b);
+    y=logic_AND(a,cin); 
+    
+
 }
 
 /**
