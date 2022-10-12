@@ -67,7 +67,7 @@ char logic_NOR(char a, char b) { //if AND is not true (0), then return true
  * to implement this function.
  */
 char logic_NAND(char a, char b) {
-    if (logic_AND(a,b)!=1){ //if AND is not true (0), then return true
+    if (logic_AND(a,b)!='1'){ //if AND is not true (0), then return true
         return '1';
     }
     return '0';
