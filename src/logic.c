@@ -145,7 +145,11 @@ void logic_FULL_ADDR(char cin, char a, char b, char *cout, char *s) {
  * to implement this function.
  */
 char logic_MUX_2_1(char s, char d_1, char d_0) {
-    return '0';
+    char u,v,y;
+    u = logic_AND(d_1, s);
+    v = logic_AND(d_0, !s);
+    y = logic_OR(u, v);
+    return y;
 }
 
 /**
