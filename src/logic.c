@@ -109,20 +109,23 @@ char logic_XOR(char a, char b) {
  * to implement this function.
  */
 void logic_FULL_ADDR(char cin, char a, char b, char *cout, char *s) {
+    char v;
     char w;
     char x;
     char y;
     char z;
 
-    //sum bit
-    w=logic_XOR(a,b); //A xor B
-    s=logic_XOR(w,cin); //A xor B xor Cin
+    //sum bit (S)
+    w=logic_XOR(a,b); //w = A xor B
+    s=logic_XOR(cin,w); //Cin xor (A xor B)
 
-    //carry bit
-    x=logic_AND(a,b);
-    y=logic_AND(a,cin); 
-    
+    //carry bit (C_out)
+    x=logic_AND(a,b); //x = A and B
+    y=logic_AND(a,cin); //y = A and C_in
+    z=logic_AND(b,cin); //z = B and C_in
 
+    v=logic_OR(y, z); //v = (A and C_in) or (B and C_in)
+    cout=logic_OR(z, v); //u= (A and B) or [(A and C_in) or (B and C_in)]
 }
 
 /**
