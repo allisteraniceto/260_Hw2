@@ -117,7 +117,7 @@ void logic_FULL_ADDR(char cin, char a, char b, char *cout, char *s) {
 
     //sum bit (S)
     w=logic_XOR(a,b); //w = A xor B
-    s=logic_XOR(cin,w); //Cin xor (A xor B)
+    *s=logic_XOR(cin,w); //Cin xor (A xor B)
 
     //carry bit (C_out)
     x=logic_AND(a,b); //x = A and B
@@ -125,7 +125,7 @@ void logic_FULL_ADDR(char cin, char a, char b, char *cout, char *s) {
     z=logic_AND(b,cin); //z = B and C_in
 
     v=logic_OR(y, z); //v = (A and C_in) or (B and C_in)
-    cout=logic_OR(z, v); //u= (A and B) or [(A and C_in) or (B and C_in)]
+    *cout=logic_OR(x, v); //u= (A and B) or [(A and C_in) or (B and C_in)]
 }
 
 /**
@@ -146,9 +146,9 @@ void logic_FULL_ADDR(char cin, char a, char b, char *cout, char *s) {
  */
 char logic_MUX_2_1(char s, char d_1, char d_0) {
     char u,v,y;
-    u = logic_AND(d_1, s);
-    v = logic_AND(d_0, !s);
-    y = logic_OR(u, v);
+    u = logic_AND(d_1, s); //u = d_1 and s
+    v = logic_AND(d_0, logic_NOT(s)); // v = d_0 and !s
+    y = logic_OR(u, v); //y = u or v
     return y;
 }
 
@@ -173,6 +173,7 @@ char logic_MUX_2_1(char s, char d_1, char d_0) {
  * to implement this function.
  */
 char logic_MUX_4_1(char *s, char d_3, char d_2, char d_1, char d_0) {
+
     return '0';
 }
 
