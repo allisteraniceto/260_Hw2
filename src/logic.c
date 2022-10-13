@@ -173,8 +173,29 @@ char logic_MUX_2_1(char s, char d_1, char d_0) {
  * to implement this function.
  */
 char logic_MUX_4_1(char *s, char d_3, char d_2, char d_1, char d_0) {
+    char p,q,r,s2,t,u,v,w,x,y,z;
 
-    return '0';
+    //first and set
+    p=logic_AND(s[0], s[1]); //p = s[0] and s[1]
+    q=logic_AND(d_3,p); //q = d_3 and (s[0] and s[1])
+
+    //second and set
+    r=logic_AND(logic_NOT(s[1]), s[0]); //r = !s[1] and s[0]
+    s2=logic_AND(d_2, r); //t = d_2 and (!s[1] and s[0])
+
+    //third and set
+    t=logic_AND(s[1], logic_NOT(s[0])); //t = s[1] and !s[0]
+    u=logic_AND(d_1, t); //u = d_1 and (s[1] and !s[0])
+
+    //fourth and set
+    v=logic_AND(logic_NOT(s[1]),logic_NOT(s[0]));//v = !s[1] and !s[0]
+    w=logic_AND(d_0, v); //w = d_0 and (!s[1] and !s[0])
+
+    //or's 
+    x=logic_OR(q,s2); //x = q or s (first half of or's)
+    y=logic_OR(u,w); //y = u or w (second half of or's)
+    z=logic_OR(x,y); //z = x or w
+    return w;
 }
 
 /**
