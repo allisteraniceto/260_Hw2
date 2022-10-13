@@ -19,6 +19,9 @@
  * to the logical and of a and b.
  */
 void logic_AND32(char *a, char *b, char *y) {
+    for (int i = 32; i >= 0 ; i--){
+        y[i]=logic_AND(a[i],b[i]);
+    }
 }
 
 /**
