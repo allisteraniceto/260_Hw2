@@ -72,9 +72,10 @@ void logic_NOT32(char *a, char *y) {
  */
 void logic_ADD32(char *a, char *b, char *s) {
     char cout = '0';
-    char x = '0';
+    char x;
     for (int i = 32; i>=0; i--){
-        logic_FULL_ADDR(cout,a[i],b[i],cout, s);
+        logic_FULL_ADDR(cout,a[i],b[i],cout, x);
+        s[i]=x;
     }
 }
 
