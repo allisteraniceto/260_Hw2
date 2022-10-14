@@ -36,6 +36,9 @@ void logic_AND32(char *a, char *b, char *y) {
  * to the logical or of a and b.
  */
 void logic_OR32(char *a, char *b, char *y) {
+    for (int i = 32; i >=0; i--){
+        y[i]=logic_OR(a[i], b[i]);
+    }
 }
 
 /**
@@ -49,6 +52,9 @@ void logic_OR32(char *a, char *b, char *y) {
  * to the logical not of a.
  */
 void logic_NOT32(char *a, char *y) {
+    for (int i = 32; i>=0; i--){
+        y[i]=logic_NOT(a[i]);
+    }
 }
 
 /**
@@ -65,6 +71,11 @@ void logic_NOT32(char *a, char *y) {
  * NOTE: Use the function logic_FULL_ADDR to implement this.
  */
 void logic_ADD32(char *a, char *b, char *s) {
+    char cout = '0';
+    char x = '0';
+    for (int i = 32; i>=0; i--){
+        logic_FULL_ADDR(cout,a[i],b[i],cout, s);
+    }
 }
 
 /**

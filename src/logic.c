@@ -217,6 +217,6 @@ char logic_MUX_4_1(char *s, char d_3, char d_2, char d_1, char d_0) {
  * to implement this function.
  */
 void logic_DECODER(char e, char a, char *y1, char *y0) {
-    *y0=logic_AND(e,logic_NOT(a));
-    *y1=logic_AND(e,a);
+    *y0=logic_AND(e,logic_NOT(a)); //y0 = e and !a
+    *y1=logic_AND(e,a); //y1 = e and a
 }
