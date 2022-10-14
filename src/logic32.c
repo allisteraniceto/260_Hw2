@@ -71,11 +71,13 @@ void logic_NOT32(char *a, char *y) {
  * NOTE: Use the function logic_FULL_ADDR to implement this.
  */
 void logic_ADD32(char *a, char *b, char *s) {
-    char cout = '0';
-    char x;
+    char cout = '0'; //used for carry
+    char cin = '0'; //base case first carry input
+    char x; //used to sum
     for (int i = 32; i>=0; i--){
-        logic_FULL_ADDR(cout,a[i],b[i],cout, x);
-        s[i]=x;
+        logic_FULL_ADDR(cin,a[i],b[i],&cout, &x); //call full adder;
+        s[i]=x; //s[i] = sum
+        cin = cout; //make carry equal to cin
     }
 }
 
@@ -93,7 +95,16 @@ void logic_ADD32(char *a, char *b, char *s) {
  * NOTE: Use the function logic_FULL_ADDR and logic_NOT to
  * implement this.
  */
-void logic_SUB32(char *a, char *b, char *s) {
+void logic_SUB32(char *a, char *b, char *s) { // a + (-b)
+    //flip bits of b
+    for (int i=32; i >=0; i--){
+        b[i]=logic_NOT(b[i]);
+    }
+    //add one to b
+    char one[33]="00000000000000000000000000000001\0"; //1 in 32 bit notation
+    logic_ADD32(b, one, b); //b = b+1
+    //a + (-b)
+    logic_ADD32(a,b,s);
 }
 
 /**
