@@ -120,7 +120,12 @@ void logic_SUB32(char *a, char *b, char *s) { // a + (-b)
  * NOTE: Use the function logic_SUB32 to implement this.
  */
 char logic_SLT32(char *a, char *b) {
-    return '0';
+    char s[33];
+    logic_SUB32(a,b,s); //s = a - b
+    if(s[0]=='1'){ //if most significant bit is 1, then it is negative (therefore a < b)
+        return '1';
+    } 
+    return '0'; //if subtraction is positive, then a > b
 }
 
 /**
@@ -139,6 +144,14 @@ char logic_SLT32(char *a, char *b) {
  * NOTE: Use the function logic_SUB32 to implement this.
  */
 void logic_EXTEND(char e, int start, char *a, char *y) {
+    int s=(-start)+33; //make start equal to element position
+    //copy a into output y;
+    for (int i=0; i<=33; i++){
+        y[i]=a[i];
+    }
+    for (int i=0; i<s; i++){ //end of it to the start of the bit to be extended
+        y[i]=e; //make bit equal to extend character
+    }
 }
 
 /**
@@ -156,6 +169,9 @@ void logic_EXTEND(char e, int start, char *a, char *y) {
  * NOTE: Use the function logic_MUX_2_1 to implement this.
  */
 void logic_MUX32_2_1(char s, char *d_1, char *d_0, char *y) {
+    for (int i=32; i>=0; i--){ //iterate through 32 bit words
+        y[i]=logic_MUX_2_1(s, d_1[i], d_0[i]); //input each bit of d_1 and d_1 into multiplexer and set to output y
+    }
 }
 
 /**
@@ -175,6 +191,9 @@ void logic_MUX32_2_1(char s, char *d_1, char *d_0, char *y) {
  * NOTE: Use the function logic_MUX_4_1 to implement this.
  */
 void logic_MUX32_4_1(char *s, char *d_3, char *d_2, char *d_1, char *d_0, char *y) {
+    for (int i=32; i>=0; i--){
+        y[i]=logic_MUX_4_1(s, d_3[i], d_2[i], d_1[i], d_0[i]);
+    }
 }
 
 /**
